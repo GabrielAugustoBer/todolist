@@ -1,8 +1,16 @@
 package com.gabrielaugusto.todolist.user;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+import org.hibernate.annotations.CreationTimestamp;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
+@Entity(name = "tb_users")
 public class UserModel {
    /*
      * String (texto)
@@ -13,9 +21,18 @@ public class UserModel {
      * Date (data)
      * void
      */
+  @Id
+  @GeneratedValue(generator = "UUID")
+   private UUID id;
    
-   public String username, name, password;
-   private  String  numeroTel;
+   @Column(unique = true)
+   private String username;
+   private String name;
+   private String password;
+   private String NumeroTel;
+
+   @CreationTimestamp
+   private LocalDateTime createdAt;
 
   /*Setters para inserir um valor
    * 
