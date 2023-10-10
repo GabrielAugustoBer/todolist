@@ -30,6 +30,7 @@ public class UserController {
       */
     @PostMapping("/")
     public void create(@RequestBody UserModel userModel) {
-        System.out.println("O nome do usuario é:" + userModel.name + "Username:" + userModel.username);
+        System.out.println("O nome é: " + userModel.name );
+        System.out.println("O numero do usuario é: " + userModel.getNumeroTel());
     }
 }
