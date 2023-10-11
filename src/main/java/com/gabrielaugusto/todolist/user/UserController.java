@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 /*
  * Modificador
@@ -28,6 +29,10 @@ public class UserController {
       if(user != null) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario já existe");
       }
+
+      var passwordHash = BCrypt.withDefaults().hashToString(12, userModel.getPassword().toCharArray());
+
+      userModel.setPassword(passwordHash);
 
         var userCreated = this.userRepository.save(userModel);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userCreated);
